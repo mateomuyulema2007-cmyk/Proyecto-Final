@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro - LogicWeb UTA</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #101114;
+      color: #f3f5f7;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    form {
+      width: min(420px, 100%);
+      background: #17191f;
+      border: 1px solid #313642;
+      border-radius: 8px;
+      padding: 30px;
+    }
+    h1 { margin: 0 0 6px; color: #65a7ff; font-size: 26px; }
+    p { margin: 0 0 20px; color: #a3adbb; line-height: 1.5; }
+    input {
+      width: 100%;
+      min-height: 42px;
+      margin: 8px 0;
+      border: 1px solid #313642;
+      border-radius: 7px;
+      background: #0b0d10;
+      color: white;
+      padding: 10px;
+    }
+    button {
+      width: 100%;
+      min-height: 42px;
+      margin-top: 10px;
+      border: 0;
+      border-radius: 7px;
+      background: #65a7ff;
+      color: #06110f;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    a { display: block; margin-top: 15px; color: #4fd6c5; text-decoration: none; font-size: 14px; text-align: center; }
+    .error { padding: 10px; margin-bottom: 12px; border-radius: 7px; color: #ffb4b4; background: rgba(255,122,122,.1); border: 1px solid rgba(255,122,122,.3); }
+  </style>
+</head>
+<body>
+  <form method="POST">
+    <h1>Crear cuenta</h1>
+    <p>Registra un usuario para guardar practicas e historial.</p>
+    {% if error %}<div class="error">{{ error }}</div>{% endif %}
+    <input type="text" name="usuario" placeholder="Nuevo usuario" required>
+    <input type="password" name="password" placeholder="Contrasena" required>
+    <button type="submit">Registrarme</button>
+    <a href="/">Volver al inicio de sesion</a>
+  </form>
+</body>
+</html>
