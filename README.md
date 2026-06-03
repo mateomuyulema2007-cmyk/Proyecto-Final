@@ -30,7 +30,7 @@ Plataforma web educativa para el aprendizaje de lógica y algoritmos de programa
 | Backend | Python 3 + Flask |
 | Base de datos | SQLite3 |
 | Frontend | HTML, CSS, JavaScript (sin frameworks externos) |
-| Servidor | [PythonAnywhere](LogicWeb.pythonanywhere.com) |
+| Servidor | PythonAnywhere |
 
 ---
 
