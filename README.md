@@ -1,2 +1,65 @@
-# Proyecto-Final
-Nuestro proyecto final LogicWeb es una plataforma web educativa e interactiva diseñada específicamente para fortalecer la enseñanza y la evaluación automatizada de los fundamentos de la lógica de programación mediante un entorno práctico y centralizado. Desarrollada con un backend en Python y desplegada en la nube a través de PythonAnywhere, la aplicación ofrece una interfaz moderna en modo oscuro que organiza de forma modular contenidos esenciales como variables, estructuras condicionales, bucles, contadores, acumuladores, funciones y conceptos básicos de programación orientada a objetos (POO). El sistema destaca por su enfoque dinámico, ya que procesa y valida las respuestas de los estudiantes en tiempo real, alimentando de forma automática un módulo de progreso e historial que actúa como un portafolio digital de evidencias. En este espacio, tanto alumnos como docentes pueden supervisar métricas clave como el número de prácticas registradas, el porcentaje de efectividad general, una retroalimentación detallada por cada intento y el cálculo automatizado de promedios académicos, optimizando así el proceso de autoaprendizaje y el seguimiento del rendimiento en el aula.
+# LogicWeb UTA 🧠
+
+Plataforma web educativa para el aprendizaje de lógica y algoritmos de programación, desarrollada como proyecto final. Permite a estudiantes repasar teoría, resolver ejercicios interactivos y llevar un historial de su progreso.
+
+---
+
+## ✨ Funcionalidades
+
+- **Autenticación** — Registro e inicio de sesión para estudiantes. Cuenta docente incluida por defecto (`profe_ruben`).
+- **Módulos de teoría** — Contenido organizado por temas:
+  - Variables y tipos de datos
+  - Condicionales
+  - Bucles y ciclos
+  - Contadores y acumuladores
+  - Funciones
+  - POO básica
+  - Comparación de lenguajes
+  - Lógica, algoritmos, pseudocódigo y estructuras de control
+- **Ejercicios interactivos** — El estudiante ingresa respuestas que son evaluadas automáticamente.
+- **Laboratorio lógico** — Práctica libre con retroalimentación inmediata.
+- **Historial y progreso** — Registro de prácticas por usuario con resumen de correctas vs. en refuerzo.
+- **Retroalimentación automática** — Cada ejercicio entrega un mensaje personalizado según el resultado.
+
+---
+
+## 🛠️ Tecnologías
+
+| Capa | Tecnología |
+|------|-----------|
+| Backend | Python 3 + Flask |
+| Base de datos | SQLite3 |
+| Frontend | HTML, CSS, JavaScript (sin frameworks externos) |
+| Servidor | [PythonAnywhere](LogicWeb.pythonanywhere.com) |
+
+---
+
+## 📁 Estructura del proyecto
+
+```
+LogicWeb_UTA/
+├── app.py                  # Lógica del servidor Flask
+├── base_datos.db           # Base de datos SQLite (se genera automáticamente)
+└── templates/
+    ├── index.html          # Dashboard principal (todos los módulos)
+    ├── login.html          # Página de inicio de sesión
+    └── registro.html       # Página de registro
+```
+
+---
+
+
+## 🔐 Credenciales por defecto
+
+| Usuario | Contraseña | Rol |
+|---------|-----------|-----|
+| `profe_ruben` | `1234` | Docente |
+
+Los estudiantes pueden registrarse desde la pantalla de inicio.
+
+---
+
+## 📌 Notas
+
+- Las contraseñas se almacenan en texto plano (proyecto académico). Para producción real se recomienda usar `werkzeug.security` o similar.
+- La base de datos `base_datos.db` se crea automáticamente si no existe al iniciar la aplicación.
