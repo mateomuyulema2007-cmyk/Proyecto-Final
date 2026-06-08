@@ -263,6 +263,29 @@
     }
     .quiz-option.correct { border-color: var(--green); color: var(--green); }
     .quiz-option.incorrect { border-color: var(--red); color: var(--red); }
+    .activity-list { display: grid; gap: 12px; margin-top: 12px; }
+    .activity-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #13161b;
+      padding: 14px;
+    }
+    .activity-card h4 { color: var(--gold); margin-bottom: 6px; font-size: 14px; }
+    .activity-card textarea { min-height: 78px; margin-top: 10px; }
+    .activity-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .activity-feedback.correct { border-color: rgba(134,224,143,.5); color: var(--green); }
+    .activity-feedback.incorrect { border-color: rgba(255,122,122,.5); color: var(--red); }
+    .teacher-only {
+      border-color: rgba(243,200,91,.45);
+      background: rgba(243,200,91,.08);
+    }
     @media (max-width: 880px) {
       .layout { grid-template-columns: 1fr; }
       aside { position: relative; height: auto; }
@@ -303,6 +326,10 @@
       <a href="#" data-page="ejercicios">Ejercicios interactivos</a>
       <a href="#" data-page="laboratorio">Laboratorio logico</a>
       <a href="#" data-page="notas">Mis notas</a>
+      {% if puede_ver_reportes %}
+      <div class="nav-title">Docente</div>
+      <a href="#" data-page="reportes">Reportes</a>
+      {% endif %}
     </nav>
   </aside>
 
@@ -356,6 +383,11 @@
           </div>
         </div>
       </div>
+      <div class="panel">
+        <h3>Actividades del modulo</h3>
+        <p>Completa cinco retos cortos. Cada respuesta se califica y queda guardada para el reporte del docente.</p>
+        <div class="module-activities" data-module-key="variables"></div>
+      </div>
     </section>
 
     <section class="page" id="page-condicionales">
@@ -369,6 +401,11 @@
       <div class="panel">
         <h3>Caso de vida real</h3>
         <p>Un sistema de transporte puede calcular tarifa segun edad: ninos pagan menos, adultos pagan tarifa normal y adultos mayores reciben descuento. Este tipo de problema exige comparar rangos y devolver mensajes claros.</p>
+      </div>
+      <div class="panel">
+        <h3>Actividades del modulo</h3>
+        <p>Resuelve cinco situaciones con decisiones logicas. El sistema marcara aciertos y errores.</p>
+        <div class="module-activities" data-module-key="condicionales"></div>
       </div>
     </section>
 
@@ -390,6 +427,11 @@
         <h3>Importancia</h3>
         <p>Sin ciclos, un programador tendria que copiar y pegar instrucciones muchas veces. Con ciclos, el codigo se vuelve mas corto, ordenado y facil de mantener.</p>
       </div>
+      <div class="panel">
+        <h3>Actividades del modulo</h3>
+        <p>Practica repeticiones con for, while y recorridos de datos.</p>
+        <div class="module-activities" data-module-key="bucles"></div>
+      </div>
     </section>
 
     <section class="page" id="page-contadores">
@@ -402,6 +444,11 @@
       <div class="panel">
         <h3>Ejemplo del proyecto</h3>
         <p>En LogicWeb UTA, el historial puede contar cuantas practicas ha realizado un usuario y cuantas fueron correctas. Esa informacion se muestra como progreso.</p>
+      </div>
+      <div class="panel">
+        <h3>Actividades del modulo</h3>
+        <p>Aplica contadores para medir eventos, intentos y resultados.</p>
+        <div class="module-activities" data-module-key="contadores"></div>
       </div>
     </section>
 
@@ -422,6 +469,11 @@
           </table>
         </div>
       </div>
+      <div class="panel">
+        <h3>Actividades del modulo</h3>
+        <p>Entrena la idea de sumar valores progresivamente durante un proceso.</p>
+        <div class="module-activities" data-module-key="acumuladores"></div>
+      </div>
     </section>
 
     <section class="page" id="page-funciones">
@@ -439,6 +491,11 @@
           <li>Permiten que cada parte del programa tenga una responsabilidad clara.</li>
         </ul>
       </div>
+      <div class="panel">
+        <h3>Actividades del modulo</h3>
+        <p>Responde y escribe pequenas funciones para comprobar parametros, return y reutilizacion.</p>
+        <div class="module-activities" data-module-key="funciones"></div>
+      </div>
     </section>
 
     <section class="page" id="page-comparacion">
@@ -455,6 +512,11 @@
       <div class="panel">
         <h3>Conclusion</h3>
         <p>Aprender logica primero facilita aprender cualquier lenguaje despues. Python suele ser mas directo para iniciar; C++ exige controlar mas detalles; Java organiza el codigo dentro de clases. En todos los casos, el razonamiento del algoritmo es el mismo.</p>
+      </div>
+      <div class="panel">
+        <h3>Actividades del modulo</h3>
+        <p>Compara sintaxis y reconoce que la logica se conserva aunque cambie el lenguaje.</p>
+        <div class="module-activities" data-module-key="comparacion"></div>
       </div>
     </section>
 
@@ -560,6 +622,11 @@
           <tr><td><strong>Atributo</strong></td><td>Dato que pertenece al objeto.</td></tr>
           <tr><td><strong>Metodo</strong></td><td>Accion que puede realizar el objeto.</td></tr>
         </table>
+      </div>
+      <div class="panel">
+        <h3>Actividades del modulo</h3>
+        <p>Practica clases, objetos, atributos y metodos con ejercicios cortos.</p>
+        <div class="module-activities" data-module-key="poo"></div>
       </div>
     </section>
 
@@ -688,6 +755,54 @@
       </div>
     </section>
 
+    {% if puede_ver_reportes %}
+    <section class="page" id="page-reportes">
+      <div class="topbar"><div><h2>Reportes docentes</h2><p>Solo el usuario docente puede revisar calificaciones, aciertos, errores y evidencias de todos los estudiantes.</p></div><a class="logout" href="/logout">Salir</a></div>
+      <div class="band teacher-only">
+        <strong>Acceso docente:</strong> este reporte resume cada modulo completado. La calificacion se calcula con respuestas correctas sobre actividades registradas.
+        <div class="btn-row"><a class="btn" href="/descargar_reporte_pdf">Descargar PDF</a></div>
+      </div>
+      <div class="panel">
+        <h3>Resumen por estudiante y modulo</h3>
+        <table>
+          <tr><th>Usuario</th><th>Modulo</th><th>Actividades</th><th>Correctas</th><th>Incorrectas</th><th>Refuerzo</th><th>Calificacion</th></tr>
+          {% for r in reporte_resumen %}
+          <tr>
+            <td>{{ r['usuario'] }}</td>
+            <td>{{ r['modulo'] }}</td>
+            <td>{{ r['total'] }}</td>
+            <td>{{ r['correctos'] or 0 }}</td>
+            <td>{{ r['incorrectos'] or 0 }}</td>
+            <td>{{ r['refuerzo'] or 0 }}</td>
+            <td><strong>{{ r['calificacion'] or 0 }}%</strong></td>
+          </tr>
+          {% else %}
+          <tr><td colspan="7">Todavia no hay actividades para reportar.</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="panel">
+        <h3>Detalle de respuestas</h3>
+        <table>
+          <tr><th>Fecha</th><th>Usuario</th><th>Modulo</th><th>Actividad</th><th>Respuesta</th><th>Resultado</th><th>Retroalimentacion</th></tr>
+          {% for d in reporte_detalle %}
+          <tr>
+            <td>{{ d['fecha'] }}</td>
+            <td>{{ d['usuario'] }}</td>
+            <td>{{ d['modulo'] }}</td>
+            <td>{{ d['ejercicio'] }}</td>
+            <td>{{ d['respuesta'] }}</td>
+            <td>{{ d['resultado'] }}</td>
+            <td>{{ d['retroalimentacion'] }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="7">No existen registros detallados.</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+    </section>
+    {% endif %}
+
     <section class="page" id="page-notas">
       <div class="topbar"><div><h2>Mis notas</h2><p>Apuntes locales para preparar la defensa del proyecto.</p></div><a class="logout" href="/logout">Salir</a></div>
       <div class="panel">
@@ -703,6 +818,88 @@
   const links = document.querySelectorAll("nav a[data-page]");
   const pages = document.querySelectorAll(".page");
   let ultimoRegistro = null;
+  const moduleActivities = {
+    variables: {
+      name: "Variables y tipos",
+      items: [
+        { title: "Identificar tipo entero", prompt: "Que tipo de dato usarias para guardar edad = 19?", answer: ["int", "entero"], mode: "exact", ok: "Correcto: una edad sin decimales se guarda como entero.", bad: "Revisa los tipos numericos: una edad como 19 no necesita decimales." },
+        { title: "Identificar tipo decimal", prompt: "Que tipo de dato corresponde a promedio = 8.75?", answer: ["float", "decimal"], mode: "exact", ok: "Bien: float permite numeros con parte decimal.", bad: "Ese valor tiene decimales, por eso necesita un tipo float o decimal." },
+        { title: "Nombrar una variable", prompt: "Escribe un buen nombre de variable para guardar el total de una compra.", answer: ["total_compra", "total", "subtotal", "valor_total"], mode: "exact", ok: "Buen nombre: comunica claramente que guarda un valor total.", bad: "Usa un nombre claro, por ejemplo total_compra." },
+        { title: "Booleano", prompt: "Completa: aprobado = promedio >= 7 guarda un valor de tipo ____.", answer: ["bool", "booleano"], mode: "exact", ok: "Exacto: una comparacion produce verdadero o falso.", bad: "La comparacion produce True o False; ese tipo es booleano." },
+        { title: "Mini codigo", prompt: "Escribe una asignacion para guardar el nombre Ana en una variable llamada nombre.", answer: ["nombre", "ana"], mode: "includes", ok: "Correcto: la variable nombre guarda el texto Ana.", bad: "Debe aparecer la variable nombre y el texto Ana." }
+      ]
+    },
+    condicionales: {
+      name: "Condicionales",
+      items: [
+        { title: "Decision principal", prompt: "Que palabra inicia una condicion en Python?", answer: ["if"], mode: "exact", ok: "Correcto: if abre la decision principal.", bad: "En Python la decision principal inicia con if." },
+        { title: "Caso alternativo", prompt: "Que palabra se ejecuta cuando ninguna condicion anterior se cumple?", answer: ["else"], mode: "exact", ok: "Bien: else cubre el caso alternativo.", bad: "El bloque alternativo se escribe con else." },
+        { title: "Comparacion", prompt: "Para saber si nota es mayor o igual que 7, escribe la condicion.", answer: ["nota", ">=", "7"], mode: "includes", ok: "Correcto: usaste la variable, el operador y el limite.", bad: "La condicion debe incluir nota >= 7." },
+        { title: "Rango de edad", prompt: "Si edad es 10, la categoria correcta es nino, adolescente, adulto o adulto mayor?", answer: ["nino", "niño"], mode: "exact", ok: "Correcto: 10 cae en la categoria nino.", bad: "Con 10 anos la categoria esperada es nino." },
+        { title: "Condicional encadenado", prompt: "Que palabra permite probar otra condicion despues de un if en Python?", answer: ["elif"], mode: "exact", ok: "Correcto: elif permite agregar otra condicion.", bad: "En Python se usa elif para otra condicion intermedia." }
+      ]
+    },
+    bucles: {
+      name: "Bucles y ciclos",
+      items: [
+        { title: "Recorrer lista", prompt: "Que ciclo conviene para recorrer notas = [8, 9, 7]?", answer: ["for"], mode: "exact", ok: "Bien: for es ideal para recorrer colecciones.", bad: "Para listas conocidas, lo mas directo es for." },
+        { title: "Repetir por condicion", prompt: "Que ciclo se usa cuando se repite mientras intentos < 3?", answer: ["while"], mode: "exact", ok: "Correcto: while depende de una condicion.", bad: "Cuando la repeticion depende de una condicion se usa while." },
+        { title: "Completar codigo", prompt: "Completa la idea: for nota in ____:", answer: ["notas"], mode: "exact", ok: "Correcto: se recorren los elementos de notas.", bad: "La lista del ejemplo se llama notas." },
+        { title: "Evitar repeticion", prompt: "Que estructura evita copiar la misma instruccion muchas veces?", answer: ["ciclo", "bucle"], mode: "exact", ok: "Exacto: los ciclos reducen repeticion de codigo.", bad: "La estructura que repite instrucciones es un ciclo o bucle." },
+        { title: "Actualizar control", prompt: "En un while con intentos, que operacion evita un ciclo infinito?", answer: ["intentos += 1", "intentos = intentos + 1", "incrementar"], mode: "exact", ok: "Correcto: actualizar el contador permite terminar.", bad: "Debes incrementar intentos para que la condicion cambie." }
+      ]
+    },
+    contadores: {
+      name: "Contadores",
+      items: [
+        { title: "Valor inicial", prompt: "Con que valor suele iniciar un contador?", answer: ["0", "cero"], mode: "exact", ok: "Correcto: normalmente empieza en cero.", bad: "Un contador normalmente inicia en 0." },
+        { title: "Contar aprobados", prompt: "Que variable podria contar estudiantes con nota >= 7?", answer: ["aprobados"], mode: "exact", ok: "Bien: aprobados describe el evento contado.", bad: "Un nombre claro seria aprobados." },
+        { title: "Incremento", prompt: "Escribe una forma de aumentar contador en 1.", answer: ["contador += 1", "contador = contador + 1"], mode: "exact", ok: "Correcto: esa instruccion incrementa el contador.", bad: "Puedes escribir contador += 1 o contador = contador + 1." },
+        { title: "Diferencia clave", prompt: "Un contador guarda cantidad de veces o suma de valores?", answer: ["cantidad de veces", "cantidad", "veces"], mode: "exact", ok: "Correcto: cuenta eventos.", bad: "El contador registra cuantas veces ocurre algo." },
+        { title: "Caso de acceso", prompt: "Si un usuario falla 3 veces al iniciar sesion, que concepto ayuda a registrar esos fallos?", answer: ["contador"], mode: "exact", ok: "Exacto: un contador registra los intentos fallidos.", bad: "Para registrar intentos se usa un contador." }
+      ]
+    },
+    acumuladores: {
+      name: "Acumuladores",
+      items: [
+        { title: "Valor inicial", prompt: "Con que valor suele iniciar un acumulador numerico?", answer: ["0", "cero"], mode: "exact", ok: "Correcto: se inicia en cero para sumar desde ahi.", bad: "Un acumulador numerico suele iniciar en 0." },
+        { title: "Sumar notas", prompt: "Completa: suma = suma + ____ dentro de un ciclo de notas.", answer: ["nota"], mode: "exact", ok: "Bien: se agrega cada nota al total.", bad: "En ese ciclo se acumula la variable nota." },
+        { title: "Calcular promedio", prompt: "Luego de acumular notas, para obtener promedio se divide suma entre ____.", answer: ["len(notas)", "cantidad", "numero de notas"], mode: "exact", ok: "Correcto: se divide para la cantidad de datos.", bad: "El promedio es suma dividido para la cantidad de notas." },
+        { title: "Diferencia", prompt: "Un acumulador guarda suma de valores o cantidad de eventos?", answer: ["suma de valores", "suma", "total"], mode: "exact", ok: "Correcto: acumula valores.", bad: "El acumulador guarda una suma o total progresivo." },
+        { title: "Caso real", prompt: "Para calcular total de ventas del dia, usarias contador o acumulador?", answer: ["acumulador"], mode: "exact", ok: "Exacto: se suman valores de ventas.", bad: "Como se suman montos, corresponde usar acumulador." }
+      ]
+    },
+    funciones: {
+      name: "Funciones",
+      items: [
+        { title: "Definir funcion", prompt: "Que palabra se usa en Python para definir una funcion?", answer: ["def"], mode: "exact", ok: "Correcto: def crea una funcion.", bad: "En Python una funcion se define con def." },
+        { title: "Devolver resultado", prompt: "Que palabra devuelve un valor desde una funcion?", answer: ["return"], mode: "exact", ok: "Bien: return entrega el resultado.", bad: "La palabra que devuelve un valor es return." },
+        { title: "Parametro", prompt: "En def saludar(nombre):, como se llama nombre?", answer: ["parametro", "parámetro"], mode: "exact", ok: "Correcto: nombre es un parametro.", bad: "Dentro de la definicion, nombre funciona como parametro." },
+        { title: "Mini codigo", prompt: "Escribe la cabecera de una funcion llamada calcular_promedio.", answer: ["def", "calcular_promedio"], mode: "includes", ok: "Correcto: la cabecera define la funcion pedida.", bad: "Debe incluir def y calcular_promedio." },
+        { title: "Ventaja", prompt: "Las funciones ayudan a evitar repetir ____.", answer: ["codigo", "código"], mode: "exact", ok: "Exacto: evitan duplicar codigo.", bad: "Una funcion evita repetir codigo." }
+      ]
+    },
+    poo: {
+      name: "POO basica",
+      items: [
+        { title: "Molde", prompt: "En POO, que concepto funciona como molde o plantilla?", answer: ["clase"], mode: "exact", ok: "Correcto: una clase es el molde.", bad: "El molde o plantilla se llama clase." },
+        { title: "Instancia", prompt: "Un elemento creado desde una clase se llama ____.", answer: ["objeto"], mode: "exact", ok: "Bien: el objeto nace desde una clase.", bad: "La instancia concreta se llama objeto." },
+        { title: "Dato del objeto", prompt: "Nombre, dificultad o solucion dentro de un objeto son ____.", answer: ["atributos", "atributo"], mode: "exact", ok: "Correcto: son atributos del objeto.", bad: "Los datos propios del objeto se llaman atributos." },
+        { title: "Accion del objeto", prompt: "Una accion como validar(respuesta) se llama ____.", answer: ["metodo", "método"], mode: "exact", ok: "Correcto: es un metodo.", bad: "Las acciones de un objeto son metodos." },
+        { title: "Constructor", prompt: "Que metodo especial inicializa atributos en Python?", answer: ["__init__", "init"], mode: "exact", ok: "Exacto: __init__ inicializa el objeto.", bad: "En Python se usa __init__ para inicializar atributos." }
+      ]
+    },
+    comparacion: {
+      name: "Comparar lenguajes",
+      items: [
+        { title: "Sintaxis directa", prompt: "Que lenguaje del ejemplo usa dos puntos despues del if?", answer: ["python"], mode: "exact", ok: "Correcto: Python usa dos puntos e indentacion.", bad: "El lenguaje con dos puntos despues del if es Python." },
+        { title: "Llaves", prompt: "C++ y Java usan que simbolos para encerrar bloques?", answer: ["llaves", "{}", "{ }"], mode: "exact", ok: "Bien: ambos usan llaves para los bloques.", bad: "C++ y Java encierran bloques con llaves." },
+        { title: "Salida en Java", prompt: "Que instruccion del ejemplo imprime en Java?", answer: ["system.out.println", "System.out.println"], mode: "exact", ok: "Correcto: System.out.println imprime en Java.", bad: "En Java se usa System.out.println." },
+        { title: "Salida en C++", prompt: "Que objeto se usa para imprimir en C++ en el ejemplo?", answer: ["cout"], mode: "exact", ok: "Correcto: cout imprime en C++.", bad: "En C++ el ejemplo usa cout." },
+        { title: "Idea central", prompt: "Al comparar lenguajes, cambia la sintaxis o cambia la logica?", answer: ["sintaxis", "cambia la sintaxis"], mode: "exact", ok: "Exacto: cambia la sintaxis, la logica se mantiene.", bad: "La idea central es que cambia la sintaxis, no la logica." }
+      ]
+    }
+  };
   const quizzes = [
     { q: "Que representa EPS en un algoritmo?", a: "Entrada, proceso y salida", o: ["Entrada, proceso y salida", "Error, prueba y solucion", "Entidad, programa y servidor"] },
     { q: "Que estructura permite repetir instrucciones?", a: "Ciclo", o: ["Condicional", "Ciclo", "Variable"] },
@@ -718,6 +915,74 @@
   function money(v) { return "$" + Number(v).toFixed(2); }
   function setUltimo(modulo, ejercicio, respuesta, resultado, retro) {
     ultimoRegistro = { modulo, ejercicio, respuesta, resultado, retroalimentacion: retro };
+  }
+  function normalizarRespuesta(valor) {
+    return String(valor || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+  function actividadCorrecta(actividad, respuesta) {
+    const texto = normalizarRespuesta(respuesta);
+    const esperadas = Array.isArray(actividad.answer) ? actividad.answer : [actividad.answer];
+    if (!texto) return false;
+    return esperadas.some(valor => {
+      const esperado = normalizarRespuesta(valor);
+      return actividad.mode === "includes" ? texto.includes(esperado) : texto === esperado || texto.includes(esperado);
+    });
+  }
+  function renderModuleActivities() {
+    document.querySelectorAll(".module-activities").forEach(container => {
+      const key = container.dataset.moduleKey;
+      const modulo = moduleActivities[key];
+      if (!modulo) return;
+      container.innerHTML = `<div class="activity-list">${modulo.items.map((actividad, index) => `
+        <div class="activity-card">
+          <h4>${index + 1}. ${actividad.title}</h4>
+          <p>${actividad.prompt}</p>
+          <textarea id="activity-${key}-${index}" placeholder="Escribe tu respuesta aqui..."></textarea>
+          <div class="activity-meta"><span>Modulo: ${modulo.name}</span><span>Actividad ${index + 1} de 5</span></div>
+          <div class="btn-row"><button onclick="evaluarActividad('${key}', ${index})">Evaluar y guardar</button></div>
+          <div class="result activity-feedback" id="feedback-${key}-${index}">Pendiente de respuesta.</div>
+        </div>
+      `).join("")}</div>`;
+    });
+  }
+  async function evaluarActividad(moduleKey, index) {
+    const modulo = moduleActivities[moduleKey];
+    const actividad = modulo.items[index];
+    const respuesta = document.getElementById(`activity-${moduleKey}-${index}`).value.trim();
+    const feedback = document.getElementById(`feedback-${moduleKey}-${index}`);
+    if (!respuesta) {
+      feedback.className = "result activity-feedback incorrect";
+      feedback.textContent = "Escribe una respuesta antes de evaluar.";
+      return;
+    }
+    const ok = actividadCorrecta(actividad, respuesta);
+    const resultado = ok ? "Correcto" : "Incorrecto";
+    const retro = ok ? actividad.ok : actividad.bad;
+    feedback.className = `result activity-feedback ${ok ? "correct" : "incorrect"}`;
+    feedback.textContent = `${resultado}. ${retro} Guardando evidencia...`;
+    const data = {
+      modulo: modulo.name,
+      ejercicio: actividad.title,
+      respuesta,
+      resultado,
+      retroalimentacion: retro
+    };
+    setUltimo(data.modulo, data.ejercicio, data.respuesta, data.resultado, data.retroalimentacion);
+    try {
+      const r = await fetch("/registrar_practica", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      feedback.textContent = r.ok ? `${resultado}. ${retro} Evidencia guardada para el reporte.` : `${resultado}. ${retro} No se pudo guardar la evidencia.`;
+    } catch (error) {
+      feedback.textContent = `${resultado}. ${retro} No se pudo conectar con el servidor para guardar.`;
+    }
   }
   function calcularSueldo() {
     const horas = Number(document.getElementById("horas").value);
@@ -818,6 +1083,7 @@
   function guardarNotas() { localStorage.setItem("logicweb_notas", notas.value); alert("Notas guardadas en este navegador."); }
   function limpiarNotas() { notas.value = ""; localStorage.removeItem("logicweb_notas"); }
   notas.value = localStorage.getItem("logicweb_notas") || "";
+  renderModuleActivities();
   nuevoQuiz();
   tablaVerdad();
   const paginaPendiente = sessionStorage.getItem("logicweb_pagina_pendiente");
